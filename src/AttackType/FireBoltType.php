@@ -4,7 +4,7 @@ namespace App\AttackType;
 
 use App\Dice;
 
-class FireBoldType implements AttackType
+class FireBoltType implements AttackType
 {
     public function performAttack(int $baseDamage): int
     {

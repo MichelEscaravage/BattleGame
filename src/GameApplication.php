@@ -2,8 +2,11 @@
 
 namespace App;
 
+use App\ArmorType\IceBlockType;
+use App\ArmorType\LeatherArmorType;
+use App\ArmorType\Shieldtype;
 use App\AttackType\BowType;
-use App\AttackType\FireBoldType;
+use App\AttackType\FireBoltType;
 use App\AttackType\MultiAttackType;
 use App\AttackType\TwoHandedSwordType;
 use App\Character\Character;
@@ -42,11 +45,10 @@ class GameApplication
     public function createCharacter(string $character): Character
     {
         return match (strtolower($character)) {
-            'fighter' => new Character(90, 12, 0.25, new TwoHandedSwordType()),
-            'archer' => new Character(80, 10, 0.15, new BowType()),
-            'mage' => new Character(70, 8, 0.10, new FireBoldType()),
-            'mage_archer' => new Character(75, 9, 0.15, new MultiAttackType([new BowType(), new FireBoldType()])),
-            default => throw new \RuntimeException('Undefined Character'),
+            'fighter' => new Character(90, 12, new TwoHandedSwordType(), new ShieldType()),
+            'archer' => new Character(80, 10, new BowType(), new LeatherArmorType()),
+            'mage' => new Character(70, 8, new FireBoltType(), new IceBlockType()),
+            'mage_archer' => new Character(75, 9, new MultiAttackType([new BowType(), new FireBoltType()]), new ShieldType()),
         };
     }
 
